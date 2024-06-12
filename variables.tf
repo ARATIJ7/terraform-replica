@@ -17,3 +17,9 @@ variable "replica_count" {
   description = "The number of MongoDB replica set members."
   default     = 3
 }
+
+variable "ssh_private_key_path" {
+  description = "Path to the SSH private key."
+  type        = string
+}
+
