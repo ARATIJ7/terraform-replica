@@ -4,7 +4,7 @@ resource "aws_instance" "mongodb" {
   instance_type = var.instance_type
   key_name      = var.key_name
   subnet_id     = aws_subnet.subnet.id
-  security_groups = [aws_security_group.mongodb_sg.name]
+  vpc_security_group_ids = [aws_security_group.mongodb_sg.id] 
 
   tags = {
     Name = "MongoDB-${count.index + 1}"
