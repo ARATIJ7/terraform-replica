@@ -35,14 +35,15 @@ resource "null_resource" "mongodb_replicas" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      host        = aws_instance.mongodb[count.index].public_ip
+      private_key = file("~/.ssh/id_rsa")
+      host        = aws_instance.mongodb_instance[count.index].public_ip
     }
 
     inline = [
-      "sleep 60",
-      "mongo --eval 'rs.add(\"${aws_instance.mongodb[count.index].private_ip}:27017\")'",
+      "sudo apt-get update",
+      "sudo apt-get install -y mongodb"
     ]
   }
-
-  depends_on = [aws_instance.mongodb]
 }
+
+
