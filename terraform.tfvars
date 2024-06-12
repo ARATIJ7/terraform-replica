@@ -1,4 +1,4 @@
-region              = "us-west-2"
+region              = "ap-southeast-2"
 instance_type       = "t2.micro"
 key_name            = "your-key-pair-name"
 replica_count       = 3
