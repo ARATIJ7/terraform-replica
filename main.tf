@@ -35,7 +35,7 @@ resource "null_resource" "mongodb_replicas" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file(var.ssh_private_key_path)
       host        = aws_instance.mongodb[count.index].public_ip
     }
 
