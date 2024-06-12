@@ -9,7 +9,9 @@ resource "aws_instance" "mongodb" {
   tags = {
     Name = "MongoDB-${count.index + 1}"
   }
-
+  # To ensure instances have public IPs (useful for testing; in production, consider using private IPs and VPC)
+  associate_public_ip_address = true
+}
   user_data = <<-EOF
               #!/bin/bash
               sudo yum update -y
@@ -29,7 +31,7 @@ resource "aws_instance" "mongodb" {
 }
 
 resource "null_resource" "mongodb_replicas" {
-  count = var.replica_count
+  count = 3
 
   provisioner "remote-exec" {
     connection {
@@ -46,4 +48,7 @@ resource "null_resource" "mongodb_replicas" {
   }
 }
 
+# Depends on ensures that the instances are created before running the provisioner
+  depends_on = [aws_instance.mongodb_instance]
+}
 
