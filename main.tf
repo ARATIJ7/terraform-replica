@@ -1,6 +1,6 @@
 resource "aws_instance" "mongodb" {
   count         = var.replica_count
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI (replace with your preferred AMI)
+  ami           = "ami-06bbf0bc3c7055d18"  # Amazon Linux 2 AMI (replace with your preferred AMI)
   instance_type = var.instance_type
   key_name      = var.key_name
   subnet_id     = aws_subnet.subnet.id
